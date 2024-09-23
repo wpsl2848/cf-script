@@ -1,0 +1,143 @@
+import requests
+import json
+from collections import defaultdict
+import csv
+
+print("Script started")
+
+# API 요청 설정
+url = 'https://api.cloudflare.com/client/v4/graphql'
+headers = {
+    'Content-Type': 'application/json',
+    'X-Auth-Email': 'hakang@mz.co.kr',
+    'X-Auth-Key': 'f6f652701a00dc80fc3c5e764adb1b84461e3'
+}
+
+print("Headers set")
+
+# GraphQL 쿼리
+query = """
+{
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      httpRequestsAdaptiveGroups(orderBy: [date_ASC]
+        filter: $filter
+        limit: 10000
+      ) { 
+        dimensions {
+          date
+          clientCountryName   
+        }
+        sum {
+          edgeResponseBytes
+        }
+      }
+    }
+  }
+}
+"""
+
+print("Query defined")
+
+# 변수 설정
+start_date = "2024-06-18"
+end_date = "2024-07-17"
+
+print(f"Date range: {start_date} to {end_date}")
+
+# CSV 파일에서 Zone ID 읽기
+zone_ids = []
+csv_file = 'enterprise_domains_98d26011d91e2c6c00a1fe006dc4b865.csv'
+try:
+    with open(csv_file, 'r') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            if 'Zone ID' in row:
+                zone_ids.append(row['Zone ID'])
+    print(f"Read {len(zone_ids)} Zone IDs from CSV file")
+except FileNotFoundError:
+    print(f"Error: CSV file '{csv_file}' not found.")
+    exit(1)
+except csv.Error as e:
+    print(f"Error reading CSV file: {e}")
+    exit(1)
+
+if not zone_ids:
+    print("No Zone IDs found in the CSV file.")
+    exit(1)
+
+# 존별 데이터 저장을 위한 딕셔너리
+zone_totals = {}
+
+# 각 존에 대해 쿼리 실행
+for zone_id in zone_ids:
+    print(f"\nProcessing zone: {zone_id}")
+    variables = {
+        "zoneTag": zone_id,
+        "filter": {
+            "date_geq": start_date,
+            "date_leq": end_date
+        }
+    }
+    
+    print("Sending API request")
+    # API 요청
+    response = requests.post(url, json={'query': query, 'variables': variables}, headers=headers)
+    
+    print(f"Received response with status code: {response.status_code}")
+    
+    # 응답 확인
+    if response.status_code == 200:
+        try:
+            data = response.json()
+            print("Successfully parsed JSON response")
+        except json.JSONDecodeError:
+            print(f"Invalid JSON response for zone {zone_id}")
+            print(f"Response content: {response.text}")
+            continue
+        
+        if data is None:
+            print(f"Null response for zone {zone_id}")
+            continue
+        
+        if 'errors' in data and data['errors']:
+            print(f"GraphQL errors for zone {zone_id}:")
+            for error in data['errors']:
+                print(error.get('message', 'Unknown error'))
+            continue
+        
+        if 'data' not in data or 'viewer' not in data['data'] or 'zones' not in data['data']['viewer']:
+            print(f"Unexpected response structure for zone {zone_id}")
+            print(f"Response content: {data}")
+            continue
+        
+        zones = data['data']['viewer']['zones']
+        if not zones:
+            print(f"No zone data found for zone {zone_id}")
+            continue
+        
+        zone_data = zones[0]
+        if 'httpRequestsAdaptiveGroups' not in zone_data or not zone_data['httpRequestsAdaptiveGroups']:
+            print(f"No data found for zone {zone_id}")
+            continue
+        
+        total_bytes = sum(group['sum']['edgeResponseBytes'] for group in zone_data['httpRequestsAdaptiveGroups'])
+        zone_totals[zone_id] = total_bytes
+        print(f"Successfully processed data for zone {zone_id}")
+    else:
+        print(f"Error for zone {zone_id}: {response.status_code}")
+        print(f"Response content: {response.text}")
+
+print("\nProcessing complete. Outputting results.")
+
+# 결과 출력
+ent_total = 0
+for zone_id, total_bytes in zone_totals.items():
+    print(f"1. zone id: {zone_id}")
+    print(f"Total data: {total_bytes}")
+    print()
+    ent_total += total_bytes
+
+print(f"2. Ent Total: {ent_total}")
+
+print("Script finished")

@@ -1,0 +1,34 @@
+{
+  "data": {
+    "viewer": {
+      "accounts": [
+        {
+          "deletes": [],
+          "lists": [],
+          "reads": [
+            {
+              "sum": {
+                "requests": 23140817
+              }
+            }
+          ],
+          "storage": [
+            {
+              "max": {
+                "byteCount": 35654540
+              }
+            }
+          ],
+          "writes": [
+            {
+              "sum": {
+                "requests": 15394726
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

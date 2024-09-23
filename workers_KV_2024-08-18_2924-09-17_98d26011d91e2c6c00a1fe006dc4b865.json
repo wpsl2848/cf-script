@@ -1,0 +1,19 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "query time range is too large for account \"98d26011d91e2c6c00a1fe006dc4b865\". Time range can't be wider than 2764800s, but it's 3125920s",
+      "path": [
+        "KVOperationsSummaryByAccount",
+        "viewer",
+        "accounts",
+        "0",
+        "deletes"
+      ],
+      "extensions": {
+        "code": "quota",
+        "timestamp": "2024-09-23T04:18:40.594705827Z"
+      }
+    }
+  ]
+}

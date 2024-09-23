@@ -1,0 +1,22 @@
+{
+  "data": {
+    "viewer": {
+      "accounts": [
+        {
+          "deletes": [],
+          "lists": [],
+          "reads": [],
+          "storage": [
+            {
+              "max": {
+                "byteCount": 35654540
+              }
+            }
+          ],
+          "writes": []
+        }
+      ]
+    }
+  },
+  "errors": null
+}

@@ -1,0 +1,83 @@
+{
+  "data": {
+    "viewer": {
+      "__typename": "viewer",
+      "accounts": [
+        {
+          "__typename": "account",
+          "workersInvocationsAdaptive": [
+            {
+              "__typename": "AccountWorkersInvocationsAdaptive",
+              "dimensions": {
+                "__typename": "AccountWorkersInvocationsAdaptiveDimensions",
+                "usageModel": "standard"
+              },
+              "sum": {
+                "Standatd_request": 100160,
+                "__typename": "AccountWorkersInvocationsAdaptiveSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersInvocationsAdaptive",
+              "dimensions": {
+                "__typename": "AccountWorkersInvocationsAdaptiveDimensions",
+                "usageModel": "unbound"
+              },
+              "sum": {
+                "Standatd_request": 140,
+                "__typename": "AccountWorkersInvocationsAdaptiveSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersInvocationsAdaptive",
+              "dimensions": {
+                "__typename": "AccountWorkersInvocationsAdaptiveDimensions",
+                "usageModel": "bundled"
+              },
+              "sum": {
+                "Standatd_request": 1330,
+                "__typename": "AccountWorkersInvocationsAdaptiveSum"
+              }
+            }
+          ],
+          "workersOverviewRequestsAdaptiveGroups": [
+            {
+              "__typename": "AccountWorkersOverviewRequestsAdaptiveGroups",
+              "dimensions": {
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsDimensions",
+                "usageModel": 2
+              },
+              "sum": {
+                "CPU_Time": 827730,
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersOverviewRequestsAdaptiveGroups",
+              "dimensions": {
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsDimensions",
+                "usageModel": 1
+              },
+              "sum": {
+                "CPU_Time": 1222890,
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersOverviewRequestsAdaptiveGroups",
+              "dimensions": {
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsDimensions",
+                "usageModel": 3
+              },
+              "sum": {
+                "CPU_Time": 63621780,
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsSum"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

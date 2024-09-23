@@ -1,0 +1,222 @@
+{
+  "2024-08-18_2024-09-17": {
+    "query_period": "2024-08-18 ~ 2024-09-17",
+    "zone_data": [
+      {
+        "zone_id": "c6506e0fa56e19e2f665b2630fdb760a",
+        "query_count": 17036626,
+        "full_result": {
+          "result": {
+            "rows": 1,
+            "data": [
+              {
+                "metrics": [
+                  17036626
+                ]
+              }
+            ],
+            "data_lag": 0,
+            "min": {},
+            "max": {},
+            "totals": {
+              "queryCount": 17036626
+            },
+            "query": {
+              "dimensions": [],
+              "metrics": [
+                "queryCount"
+              ],
+              "sort": [
+                {
+                  "Id": "queryCount",
+                  "Desc": true
+                }
+              ],
+              "since": "2024-08-18T00:00:00Z",
+              "until": "2024-09-17T00:00:00Z",
+              "limit": 100
+            }
+          },
+          "success": true,
+          "errors": [],
+          "messages": []
+        }
+      },
+      {
+        "zone_id": "6c7286ec807229969935b58c8e8bb92a",
+        "query_count": "DNS partial",
+        "full_result": {
+          "error": "DNS partial"
+        }
+      },
+      {
+        "zone_id": "2ee488f391fda9831140df3e6255c8cc",
+        "query_count": 162051,
+        "full_result": {
+          "result": {
+            "rows": 1,
+            "data": [
+              {
+                "metrics": [
+                  162051
+                ]
+              }
+            ],
+            "data_lag": 0,
+            "min": {},
+            "max": {},
+            "totals": {
+              "queryCount": 162051
+            },
+            "query": {
+              "dimensions": [],
+              "metrics": [
+                "queryCount"
+              ],
+              "sort": [
+                {
+                  "Id": "queryCount",
+                  "Desc": true
+                }
+              ],
+              "since": "2024-08-18T00:00:00Z",
+              "until": "2024-09-17T00:00:00Z",
+              "limit": 100
+            }
+          },
+          "success": true,
+          "errors": [],
+          "messages": []
+        }
+      },
+      {
+        "zone_id": "329d2de0b2fac7e59a6b2b0564b996ff",
+        "query_count": 86298012,
+        "full_result": {
+          "result": {
+            "rows": 1,
+            "data": [
+              {
+                "metrics": [
+                  86298012
+                ]
+              }
+            ],
+            "data_lag": 0,
+            "min": {},
+            "max": {},
+            "totals": {
+              "queryCount": 86298012
+            },
+            "query": {
+              "dimensions": [],
+              "metrics": [
+                "queryCount"
+              ],
+              "sort": [
+                {
+                  "Id": "queryCount",
+                  "Desc": true
+                }
+              ],
+              "since": "2024-08-18T00:00:00Z",
+              "until": "2024-09-17T00:00:00Z",
+              "limit": 100
+            }
+          },
+          "success": true,
+          "errors": [],
+          "messages": []
+        }
+      },
+      {
+        "zone_id": "0a0480897b3a1efe664da96d3f493287",
+        "query_count": 1292893,
+        "full_result": {
+          "result": {
+            "rows": 1,
+            "data": [
+              {
+                "metrics": [
+                  1292893
+                ]
+              }
+            ],
+            "data_lag": 0,
+            "min": {},
+            "max": {},
+            "totals": {
+              "queryCount": 1292893
+            },
+            "query": {
+              "dimensions": [],
+              "metrics": [
+                "queryCount"
+              ],
+              "sort": [
+                {
+                  "Id": "queryCount",
+                  "Desc": true
+                }
+              ],
+              "since": "2024-08-18T00:00:00Z",
+              "until": "2024-09-17T00:00:00Z",
+              "limit": 100
+            }
+          },
+          "success": true,
+          "errors": [],
+          "messages": []
+        }
+      },
+      {
+        "zone_id": "0d687215dde48b8c0c1b08353b7b609d",
+        "query_count": "DNS partial",
+        "full_result": {
+          "error": "DNS partial"
+        }
+      },
+      {
+        "zone_id": "24f98b614a0f681891d4f1947aff6272",
+        "query_count": 15196509,
+        "full_result": {
+          "result": {
+            "rows": 1,
+            "data": [
+              {
+                "metrics": [
+                  15196509
+                ]
+              }
+            ],
+            "data_lag": 0,
+            "min": {},
+            "max": {},
+            "totals": {
+              "queryCount": 15196509
+            },
+            "query": {
+              "dimensions": [],
+              "metrics": [
+                "queryCount"
+              ],
+              "sort": [
+                {
+                  "Id": "queryCount",
+                  "Desc": true
+                }
+              ],
+              "since": "2024-08-18T00:00:00Z",
+              "until": "2024-09-17T00:00:00Z",
+              "limit": 100
+            }
+          },
+          "success": true,
+          "errors": [],
+          "messages": []
+        }
+      }
+    ],
+    "total_query_count": 119986091
+  }
+}

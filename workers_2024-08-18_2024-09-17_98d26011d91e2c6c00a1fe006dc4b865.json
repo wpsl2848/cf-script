@@ -1,0 +1,83 @@
+{
+  "data": {
+    "viewer": {
+      "__typename": "viewer",
+      "accounts": [
+        {
+          "__typename": "account",
+          "workersInvocationsAdaptive": [
+            {
+              "__typename": "AccountWorkersInvocationsAdaptive",
+              "dimensions": {
+                "__typename": "AccountWorkersInvocationsAdaptiveDimensions",
+                "usageModel": "bundled"
+              },
+              "sum": {
+                "Standatd_request": 244052900,
+                "__typename": "AccountWorkersInvocationsAdaptiveSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersInvocationsAdaptive",
+              "dimensions": {
+                "__typename": "AccountWorkersInvocationsAdaptiveDimensions",
+                "usageModel": "unbound"
+              },
+              "sum": {
+                "Standatd_request": 58223800,
+                "__typename": "AccountWorkersInvocationsAdaptiveSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersInvocationsAdaptive",
+              "dimensions": {
+                "__typename": "AccountWorkersInvocationsAdaptiveDimensions",
+                "usageModel": "standard"
+              },
+              "sum": {
+                "Standatd_request": 122047600,
+                "__typename": "AccountWorkersInvocationsAdaptiveSum"
+              }
+            }
+          ],
+          "workersOverviewRequestsAdaptiveGroups": [
+            {
+              "__typename": "AccountWorkersOverviewRequestsAdaptiveGroups",
+              "dimensions": {
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsDimensions",
+                "usageModel": 2
+              },
+              "sum": {
+                "CPU_Time": 8967254261700,
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersOverviewRequestsAdaptiveGroups",
+              "dimensions": {
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsDimensions",
+                "usageModel": 1
+              },
+              "sum": {
+                "CPU_Time": 374227593800,
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsSum"
+              }
+            },
+            {
+              "__typename": "AccountWorkersOverviewRequestsAdaptiveGroups",
+              "dimensions": {
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsDimensions",
+                "usageModel": 3
+              },
+              "sum": {
+                "CPU_Time": 127933448100,
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsSum"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

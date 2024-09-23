@@ -1,0 +1,39 @@
+{
+  "data": {
+    "viewer": {
+      "__typename": "viewer",
+      "accounts": [
+        {
+          "__typename": "account",
+          "workersInvocationsAdaptive": [
+            {
+              "__typename": "AccountWorkersInvocationsAdaptive",
+              "dimensions": {
+                "__typename": "AccountWorkersInvocationsAdaptiveDimensions",
+                "usageModel": "bundled"
+              },
+              "sum": {
+                "Standatd_request": 450,
+                "__typename": "AccountWorkersInvocationsAdaptiveSum"
+              }
+            }
+          ],
+          "workersOverviewRequestsAdaptiveGroups": [
+            {
+              "__typename": "AccountWorkersOverviewRequestsAdaptiveGroups",
+              "dimensions": {
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsDimensions",
+                "usageModel": 1
+              },
+              "sum": {
+                "CPU_Time": 606540,
+                "__typename": "AccountWorkersOverviewRequestsAdaptiveGroupsSum"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

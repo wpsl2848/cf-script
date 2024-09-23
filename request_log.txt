@@ -1,0 +1,73 @@
+2024-09-20 07:20:50,007 - INFO - Using fixed cookies (except PCID):
+2024-09-20 07:20:50,007 - INFO -   *fbp: fb.1.1725514841787.28740479256780913
+2024-09-20 07:20:50,007 - INFO -   MARKETID: 21868289239461214812586
+2024-09-20 07:20:50,007 - INFO -   __cf_bm: CZdjaNq5PxHv51CCHhI7yd6kWPVdlvSKBiDQX2ar4bc-1725514833-1.0.1.1-Z9FWohRK7J_qPwp3sqd43noYLRMovJGLp7ffNNKJTSujJDe7Tiydc66Hlb_zLbOGS5V6PsHtz._bHMqa0emczg
+2024-09-20 07:20:50,007 - INFO -   baby-isWide: small
+2024-09-20 07:20:50,007 - INFO -   cf_clearance: oYLRsqn4tR3woYSnNJ3ob2.J9OHEHDNPdo4nluvEfF8-1725514842-1.2.1.1-QYRwQkvkf5hG3zQfMnstrzupLGj0ed3ay2gMiEMXNAApBFdyeTdrXdQXCa5PgtFwuNVJV9jaDuCw7PzzDjHvgSWees34l0I2wnxwke3K6uhFW6AtF9n0ejFxeC0sWMlGeDS1YgF9ktpl5YYNlkxnFN7qNZNmZqolswV8SDmUaxgfPrA5p5bEChkfyD39ArFOE8qbjrG0ekl8NI64kA0SM_NHTabFpvmfxPTA9krMZlO1XMz7lrD_OrZ5tn36n_TkqkBe2mrmiYnwncJ6OC_AOpX7b3MH3FkcIk72r9yU9F2_CrH_H02X6.zwlfVy4UTW189z.JrM_lRsTPVap2VVNbVG5uMjl.UYnbTdEKtnoIJizSyD5ZGAe5XmcRSNBbBvwzvbU1Hgj3YiSALC.4uc2w
+2024-09-20 07:20:50,007 - INFO -   cto*bundle: 9K_jO18ya2Q2aHVKalExa2NNekVPWFU2bnolMkZ4a1VQQ3Bidk4ycVJSNEcxSlZBMHg2SUlmb1FFdmpSSWRtTWRLN1FsU1ZObiUyQmhPTGMyOWJIWDZGRG0zUmlGekRSeEYwZEIyZVU5VjZPdDY1eG9DZ2RVWDRVUDRIS1FwMnZhMFg3dUJ3dEElMkJ2ciUyRkd2UFE5NmFDMSUyQmdNT0VQWWFnJTNEJTNE
+2024-09-20 07:20:50,007 - INFO -   overrideAbTestGroup: %5B%5D
+2024-09-20 07:20:50,008 - INFO -   sid: a945715636fa467d98cfaae723a409551d37d13d
+2024-09-20 07:20:50,008 - INFO -   x-coupang-accept-language: ko-KR
+2024-09-20 07:20:50,008 - INFO -   x-coupang-target-market: KR
+2024-09-20 07:20:50,008 - INFO - Generated PCIDs:
+2024-09-20 07:20:50,008 - INFO -   PCID 1: 60381931369784931911
+2024-09-20 07:20:50,008 - INFO -   PCID 2: 62903026617496390815
+2024-09-20 07:20:50,008 - INFO -   PCID 3: 43180055785821673553
+2024-09-20 07:20:50,119 - INFO - Request 1: URL = https://hakang.cflare.kr/vp/products/050045756, PCID = 60381931369784931911, Status Code = 404, Time = 0.11s
+2024-09-20 07:20:50,248 - INFO - Request 2: URL = https://hakang.cflare.kr/vp/products/865317207, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:50,386 - INFO - Request 3: URL = https://hakang.cflare.kr/vp/products/784798813, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:50,526 - INFO - Request 4: URL = https://hakang.cflare.kr/vp/products/461869646, PCID = 60381931369784931911, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:50,663 - INFO - Request 5: URL = https://hakang.cflare.kr/vp/products/618968395, PCID = 62903026617496390815, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:50,794 - INFO - Request 6: URL = https://hakang.cflare.kr/vp/products/132721405, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:50,926 - INFO - Request 7: URL = https://hakang.cflare.kr/vp/products/566791311, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:51,055 - INFO - Request 8: URL = https://hakang.cflare.kr/vp/products/124943140, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:51,186 - INFO - Request 9: URL = https://hakang.cflare.kr/vp/products/898590545, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:51,320 - INFO - Request 10: URL = https://hakang.cflare.kr/vp/products/246587006, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:51,448 - INFO - Request 11: URL = https://hakang.cflare.kr/vp/products/663616230, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:51,571 - INFO - Request 12: URL = https://hakang.cflare.kr/vp/products/712641588, PCID = 43180055785821673553, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:51,705 - INFO - Request 13: URL = https://hakang.cflare.kr/vp/products/568379097, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:51,835 - INFO - Request 14: URL = https://hakang.cflare.kr/vp/products/938780319, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:51,974 - INFO - Request 15: URL = https://hakang.cflare.kr/vp/products/174719946, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:52,096 - INFO - Request 16: URL = https://hakang.cflare.kr/vp/products/464100854, PCID = 60381931369784931911, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:52,242 - INFO - Request 17: URL = https://hakang.cflare.kr/vp/products/226373087, PCID = 62903026617496390815, Status Code = 404, Time = 0.05s
+2024-09-20 07:20:52,372 - INFO - Request 18: URL = https://hakang.cflare.kr/vp/products/642542829, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:52,502 - INFO - Request 19: URL = https://hakang.cflare.kr/vp/products/518218663, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:52,636 - INFO - Request 20: URL = https://hakang.cflare.kr/vp/products/203535522, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:52,766 - INFO - Request 21: URL = https://hakang.cflare.kr/vp/products/066591593, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:52,898 - INFO - Request 22: URL = https://hakang.cflare.kr/vp/products/746693271, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:53,025 - INFO - Request 23: URL = https://hakang.cflare.kr/vp/products/232700873, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:53,163 - INFO - Request 24: URL = https://hakang.cflare.kr/vp/products/296938045, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:53,299 - INFO - Request 25: URL = https://hakang.cflare.kr/vp/products/907786133, PCID = 60381931369784931911, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:53,443 - INFO - Request 26: URL = https://hakang.cflare.kr/vp/products/986474153, PCID = 62903026617496390815, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:53,576 - INFO - Request 27: URL = https://hakang.cflare.kr/vp/products/777825318, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:53,706 - INFO - Request 28: URL = https://hakang.cflare.kr/vp/products/295761619, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:53,830 - INFO - Request 29: URL = https://hakang.cflare.kr/vp/products/642242679, PCID = 62903026617496390815, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:53,966 - INFO - Request 30: URL = https://hakang.cflare.kr/vp/products/158332759, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:54,100 - INFO - Request 31: URL = https://hakang.cflare.kr/vp/products/854962995, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:54,227 - INFO - Request 32: URL = https://hakang.cflare.kr/vp/products/000570329, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:54,352 - INFO - Request 33: URL = https://hakang.cflare.kr/vp/products/423488510, PCID = 43180055785821673553, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:54,482 - INFO - Request 34: URL = https://hakang.cflare.kr/vp/products/796151933, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:54,605 - INFO - Request 35: URL = https://hakang.cflare.kr/vp/products/636634257, PCID = 62903026617496390815, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:54,746 - INFO - Request 36: URL = https://hakang.cflare.kr/vp/products/667147721, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:54,877 - INFO - Request 37: URL = https://hakang.cflare.kr/vp/products/988196528, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:55,010 - INFO - Request 38: URL = https://hakang.cflare.kr/vp/products/618601642, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:55,148 - INFO - Request 39: URL = https://hakang.cflare.kr/vp/products/183025367, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:55,272 - INFO - Request 40: URL = https://hakang.cflare.kr/vp/products/823240745, PCID = 60381931369784931911, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:55,398 - INFO - Request 41: URL = https://hakang.cflare.kr/vp/products/239862586, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:55,520 - INFO - Request 42: URL = https://hakang.cflare.kr/vp/products/230189734, PCID = 43180055785821673553, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:55,642 - INFO - Request 43: URL = https://hakang.cflare.kr/vp/products/386066134, PCID = 60381931369784931911, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:55,774 - INFO - Request 44: URL = https://hakang.cflare.kr/vp/products/710673783, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:55,910 - INFO - Request 45: URL = https://hakang.cflare.kr/vp/products/944824111, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:56,042 - INFO - Request 46: URL = https://hakang.cflare.kr/vp/products/777093229, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:56,193 - INFO - Request 47: URL = https://hakang.cflare.kr/vp/products/702179094, PCID = 62903026617496390815, Status Code = 404, Time = 0.05s
+2024-09-20 07:20:56,327 - INFO - Request 48: URL = https://hakang.cflare.kr/vp/products/998273571, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:56,463 - INFO - Request 49: URL = https://hakang.cflare.kr/vp/products/636129661, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:56,592 - INFO - Request 50: URL = https://hakang.cflare.kr/vp/products/134511249, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:56,732 - INFO - Request 51: URL = https://hakang.cflare.kr/vp/products/312586802, PCID = 43180055785821673553, Status Code = 404, Time = 0.04s
+2024-09-20 07:20:56,854 - INFO - Request 52: URL = https://hakang.cflare.kr/vp/products/021874643, PCID = 60381931369784931911, Status Code = 404, Time = 0.02s
+2024-09-20 07:20:56,981 - INFO - Request 53: URL = https://hakang.cflare.kr/vp/products/491071062, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:57,111 - INFO - Request 54: URL = https://hakang.cflare.kr/vp/products/980811283, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:57,240 - INFO - Request 55: URL = https://hakang.cflare.kr/vp/products/833562122, PCID = 60381931369784931911, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:57,366 - INFO - Request 56: URL = https://hakang.cflare.kr/vp/products/049675264, PCID = 62903026617496390815, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:57,493 - INFO - Request 57: URL = https://hakang.cflare.kr/vp/products/033514679, PCID = 43180055785821673553, Status Code = 404, Time = 0.03s
+2024-09-20 07:20:57,617 - INFO - Request 58: URL = https://hakang.cflare.kr/vp/products/025987631, PCID = 60381931369784931911, Status Code = 404, Time = 0.02s

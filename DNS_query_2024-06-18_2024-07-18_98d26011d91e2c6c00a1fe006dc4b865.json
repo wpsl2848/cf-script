@@ -1,0 +1,34 @@
+{
+  "query_period": "2024-06-18 ~ 2024-07-18",
+  "zone_data": [
+    {
+      "zone_id": "c6506e0fa56e19e2f665b2630fdb760a",
+      "query_count": 19642516
+    },
+    {
+      "zone_id": "6c7286ec807229969935b58c8e8bb92a",
+      "query_count": "DNS partial"
+    },
+    {
+      "zone_id": "2ee488f391fda9831140df3e6255c8cc",
+      "query_count": 62628
+    },
+    {
+      "zone_id": "329d2de0b2fac7e59a6b2b0564b996ff",
+      "query_count": 93538647
+    },
+    {
+      "zone_id": "0a0480897b3a1efe664da96d3f493287",
+      "query_count": 1164816
+    },
+    {
+      "zone_id": "0d687215dde48b8c0c1b08353b7b609d",
+      "query_count": "DNS partial"
+    },
+    {
+      "zone_id": "24f98b614a0f681891d4f1947aff6272",
+      "query_count": 13238382
+    }
+  ],
+  "total_query_count": 127646989
+}
