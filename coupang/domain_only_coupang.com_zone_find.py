@@ -6,6 +6,7 @@ from typing import List, Dict
 from dataclasses import dataclass
 import pandas as pd
 from datetime import datetime
+import argparse
 
 @dataclass
 class RuleDetails:
@@ -18,15 +19,15 @@ class RuleDetails:
     rule_enabled: bool
 
 class CloudflareRuleFinder:
-    def __init__(self):
+    def __init__(self, target_domain: str):
         self.headers = {
             "X-Auth-Email": "hakang@mz.co.kr",
             "X-Auth-Key": "f6f652701a00dc80fc3c5e764adb1b84461e3",
             "Content-Type": "application/json"
         }
         self.base_url = "https://api.cloudflare.com/client/v4"
-        self.target_domain = "api-gateway.coupang.com"
-        self.coupang_zone_id = None  # Will be set when reading zones
+        self.target_domain = target_domain
+        self.coupang_zone_id = None
         self.rules_found: List[RuleDetails] = []
         
         # Create reports directory
@@ -60,7 +61,7 @@ class CloudflareRuleFinder:
 
     def process_zone_rulesets(self):
         """Process coupang.com zone rulesets"""
-        print("\nProcessing coupang.com zone rulesets...")
+        print(f"\nProcessing coupang.com zone rulesets for domain: {self.target_domain}...")
         
         # Get coupang.com zone ID
         self.coupang_zone_id = self.get_coupang_zone_id()
@@ -98,7 +99,7 @@ class CloudflareRuleFinder:
     def export_to_excel(self):
         """Export found rules to Excel"""
         if not self.rules_found:
-            print("No rules found containing the target domain.")
+            print(f"No rules found containing the target domain: {self.target_domain}")
             return
 
         # Convert rules to DataFrame
@@ -111,9 +112,10 @@ class CloudflareRuleFinder:
         ]
         df = df[columns]
         
-        # Generate filename with timestamp
+        # Generate filename with timestamp and target domain
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f'reports/api_gateway_rules_{timestamp}.xlsx'
+        domain_slug = self.target_domain.replace('.', '_')
+        filename = f'reports/{domain_slug}_rules_{timestamp}.xlsx'
         
         # Export to Excel
         df.to_excel(filename, index=False, sheet_name='Rules')
@@ -122,7 +124,29 @@ class CloudflareRuleFinder:
         print(f"Results exported to: {filename}")
 
 def main():
-    finder = CloudflareRuleFinder()
+    # Set up argument parser
+    parser = argparse.ArgumentParser(description='Find Cloudflare rules containing a specific domain')
+    parser.add_argument('domain', help='Target domain to search for in rules')
+    
+    # Add optional arguments
+    parser.add_argument('-i', '--interactive', action='store_true', 
+                        help='Run in interactive mode (ignore command line domain)')
+
+    args = parser.parse_args()
+
+    # Get domain from user input if interactive mode is enabled
+    if args.interactive:
+        target_domain = input("Enter the domain to search for in rules: ").strip()
+    else:
+        target_domain = args.domain
+
+    # Validate domain input
+    if not target_domain:
+        print("Error: Domain cannot be empty")
+        return
+
+    # Create finder instance and process rules
+    finder = CloudflareRuleFinder(target_domain)
     finder.process_zone_rulesets()
     finder.export_to_excel()
 
