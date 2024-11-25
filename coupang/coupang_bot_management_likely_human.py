@@ -135,7 +135,10 @@ def process_zone_data(zone_id, response_data):
     return f"Zone ID: {zone_id}, Likely Human Count: {formatted_count}", likely_human_count
 
 def save_query_result(zone_id, start_date, end_date, response_data):
-    filename = f"bot_{start_date}_{end_date}_{zone_id}.json"
+    # reports/bot 폴더 구조 생성
+    os.makedirs('reports/bot', exist_ok=True)
+    
+    filename = f"reports/bot/bot_{start_date}_{end_date}_{zone_id}.json"
     with open(filename, 'w') as f:
         json.dump(response_data, f, indent=2)
     print(f"Query result saved to {filename}")

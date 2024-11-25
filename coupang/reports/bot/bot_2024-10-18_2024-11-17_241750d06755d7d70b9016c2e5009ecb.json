@@ -1,0 +1,36 @@
+{
+  "data": {
+    "viewer": {
+      "zones": [
+        {
+          "Total": [
+            {
+              "count": 621210
+            }
+          ],
+          "automated": [
+            {
+              "count": 178330
+            }
+          ],
+          "likely_automated": [
+            {
+              "count": 10580
+            }
+          ],
+          "likely_human": [
+            {
+              "count": 163250
+            }
+          ],
+          "verified_bot": [
+            {
+              "count": 269050
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

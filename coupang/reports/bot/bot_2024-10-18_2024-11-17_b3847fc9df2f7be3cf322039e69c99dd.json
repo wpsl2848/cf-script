@@ -1,0 +1,18 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "zone 'b3847fc9df2f7be3cf322039e69c99dd' does not have access to the field 'botscore' from the path",
+      "path": [
+        "viewer",
+        "zones",
+        "0",
+        "automated"
+      ],
+      "extensions": {
+        "code": "authz",
+        "timestamp": "2024-11-21T08:33:03.021943008Z"
+      }
+    }
+  ]
+}
