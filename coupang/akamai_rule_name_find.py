@@ -165,6 +165,27 @@ class CloudflareRuleFinder:
                 for rule in rules:
                     self.check_rule_for_terms(rule, ruleset_name, ruleset_phase, zone.domain)
 
+    def get_summary_details(self, term_rules: List[RuleDetails]) -> Dict:
+        """특정 검색어에 대한 요약 정보 생성"""
+        if not term_rules:
+            return {
+                '발견된 규칙 수': 0,
+                '상태': "규칙 없음",
+                '발견된 Zone': "",
+                '발견된 Ruleset': ""
+            }
+        
+        # 중복 제거를 위해 set 사용
+        zones = set(rule.domain for rule in term_rules)
+        rulesets = set(rule.ruleset_name for rule in term_rules)
+        
+        return {
+            '발견된 규칙 수': len(term_rules),
+            '상태': f"{len(term_rules)}개의 규칙 발견됨",
+            '발견된 Zone': "\n".join(sorted(zones)),
+            '발견된 Ruleset': "\n".join(sorted(rulesets))
+        }
+
     def export_to_excel(self):
         """검색된 규칙을 Excel로 내보내기"""
         if not self.rules_found:
@@ -173,7 +194,6 @@ class CloudflareRuleFinder:
 
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         
-        # 사용자가 입력한 파일 이름이 있으면 사용, 없으면 기본 이름 사용
         if self.custom_filename:
             base_filename = self.custom_filename
         else:
@@ -185,17 +205,17 @@ class CloudflareRuleFinder:
             # 요약 정보를 저장할 데이터 준비
             summary_data = []
             
-            # 각 검색어별 규칙 수 집계
+            # 각 검색어별 규칙 수 집계 및 요약 정보 생성
             for search_term in self.search_terms:
                 term_rules = [rule for rule in self.rules_found if rule.search_term == search_term]
-                rule_count = len(term_rules)
+                summary_info = self.get_summary_details(term_rules)
                 
                 summary_data.append({
                     '검색어': search_term,
-                    '발견된 규칙 수': rule_count,
-                    '상태': f"{rule_count}개의 규칙 발견됨" if rule_count > 0 else "규칙 없음"
+                    **summary_info
                 })
-                print(f"\n검색어 '{search_term}'에 대해 {rule_count}개의 규칙이 발견되었습니다.")
+                
+                print(f"\n검색어 '{search_term}'에 대해 {len(term_rules)}개의 규칙이 발견되었습니다.")
 
             # 1. 먼저 요약 시트 생성 (첫 번째 시트)
             summary_df = pd.DataFrame(summary_data)
@@ -203,16 +223,33 @@ class CloudflareRuleFinder:
             
             # 요약 시트 스타일링
             summary_sheet = writer.sheets['검색 결과 요약']
-            summary_sheet.set_column('A:A', 40)
-            summary_sheet.set_column('B:B', 15)
-            summary_sheet.set_column('C:C', 25)
+            summary_sheet.set_column('A:A', 40)  # 검색어
+            summary_sheet.set_column('B:B', 15)  # 발견된 규칙 수
+            summary_sheet.set_column('C:C', 25)  # 상태
+            summary_sheet.set_column('D:D', 40)  # 발견된 Zone
+            summary_sheet.set_column('E:E', 40)  # 발견된 Ruleset
+            
+            # 줄 바꿈 설정을 위한 셀 포맷
+            wrap_format = writer.book.add_format({'text_wrap': True})
+            summary_sheet.set_row(0, 30)  # 헤더 행 높이 설정
+            
+            # 모든 데이터 행에 대해 높이 자동 조정
+            for row in range(1, len(summary_data) + 1):
+                summary_sheet.set_row(row, 100)  # 데이터 행 높이 설정
+            
+            # Zone과 Ruleset 열에 줄 바꿈 형식 적용
+            for row in range(1, len(summary_data) + 1):
+                summary_sheet.write(row, 3, summary_data[row-1]['발견된 Zone'], wrap_format)
+                summary_sheet.write(row, 4, summary_data[row-1]['발견된 Ruleset'], wrap_format)
             
             # 헤더 스타일
-            workbook = writer.book
-            header_format = workbook.add_format({
+            header_format = writer.book.add_format({
                 'bold': True,
                 'bg_color': '#D9E1F2',
-                'border': 1
+                'border': 1,
+                'text_wrap': True,
+                'valign': 'vcenter',
+                'align': 'center'
             })
             
             # 헤더 스타일 적용
@@ -232,7 +269,6 @@ class CloudflareRuleFinder:
                     ]
                     df = df[columns]
                     
-                    # 시트 이름에서 사용할 수 없는 문자 처리
                     safe_sheet_name = self.sanitize_sheet_name(search_term)
                     df.to_excel(writer, sheet_name=safe_sheet_name, index=False)
                     
@@ -249,7 +285,7 @@ class CloudflareRuleFinder:
         
         print(f"\n결과가 다음 파일에 저장되었습니다: {filename}")
         print("'검색 결과 요약' 시트가 첫 번째 시트로 배치되었습니다.")
-
+    
 def main():
     try:
         finder = CloudflareRuleFinder()
