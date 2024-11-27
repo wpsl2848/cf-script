@@ -2,13 +2,12 @@ import requests
 import json
 import csv
 import os
-import re
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Optional
 from dataclasses import dataclass
 import pandas as pd
 from datetime import datetime
 
-@dataclass(frozen=True)  # frozen=True를 추가하여 해시 가능하게 만듦
+@dataclass(frozen=True)
 class ZoneInfo:
     domain: str
     plan: str
@@ -39,14 +38,36 @@ class CloudflareRuleFinder:
         self.rules_found: List[RuleDetails] = []
         self.related_zones: Dict[str, List[ZoneInfo]] = {}
         
-        # Create reports directory
         os.makedirs('reports', exist_ok=True)
+
+    def get_check_domains(self, domain: str) -> List[str]:
+        """검사할 도메인 목록을 반환
+        3단계 도메인: 전체 도메인과 루트 도메인 반환
+        4단계 이상 도메인: 2depth부터 순차적으로 반환"""
+        parts = domain.split('.')
+        
+        # 2단계 이하 도메인은 그대로 반환 (예: coupang.com)
+        if len(parts) <= 2:
+            return [domain]
+            
+        # 3단계 도메인 (예: cmapi.coupang.com)
+        if len(parts) == 3:
+            return [
+                domain,  # 전체 도메인 (cmapi.coupang.com)
+                '.'.join(parts[-2:])  # 루트 도메인 (coupang.com)
+            ]
+        
+        # 4단계 이상 도메인 (예: ljc.jp.coupang.com)
+        root_domain = '.'.join(parts[-2:])  # coupang.com
+        second_level = '.'.join(parts[-3:])  # jp.coupang.com
+        
+        return [second_level, root_domain]
 
     def set_target_domains(self):
         """사용자로부터 검색할 도메인들을 입력받음"""
         print("\n검색할 도메인들을 입력해주세요.")
         print("여러 도메인을 검색하려면 쉼표(,)로 구분하여 입력하세요.")
-        print("예시: spam-dev.coupangcorp.com, api-gateway.coupang.com")
+        print("예시: cmapi.coupang.com, ljc.jp.coupang.com")
         
         domains_input = input("\n도메인 입력: ").strip()
         self.target_domains = [domain.strip() for domain in domains_input.split(',') if domain.strip()]
@@ -57,13 +78,6 @@ class CloudflareRuleFinder:
         print(f"\n검색할 도메인 목록:")
         for domain in self.target_domains:
             print(f"- {domain}")
-
-    def get_parent_domain(self, domain: str) -> str:
-        """도메인에서 메인 도메인을 추출 (예: spam-dev.coupangcorp.com -> coupangcorp.com)"""
-        parts = domain.split('.')
-        if len(parts) > 2:
-            return '.'.join(parts[-2:])
-        return domain
 
     def read_zones_from_csv(self, csv_file: str) -> List[ZoneInfo]:
         """Read zone information from CSV file"""
@@ -81,21 +95,29 @@ class CloudflareRuleFinder:
     def identify_related_zones(self, zones: List[ZoneInfo]):
         """각 검색 도메인과 관련된 zone들을 식별"""
         for target_domain in self.target_domains:
-            parent_domain = self.get_parent_domain(target_domain)
+            check_domains = self.get_check_domains(target_domain)
+            found_zone = False
             related_zones = []
             
-            for zone in zones:
-                if zone.domain == parent_domain:
-                    related_zones.append(zone)
-            
-            self.related_zones[target_domain] = related_zones
             print(f"\n도메인 '{target_domain}'에 대한 검사 범위:")
             print(f"- Account 레벨 규칙")
-            if related_zones:
-                for zone in related_zones:
-                    print(f"- Zone: {zone.domain} (ID: {zone.zone_id})")
-            else:
+            
+            # 도메인을 순차적으로 확인
+            for check_domain in check_domains:
+                for zone in zones:
+                    if zone.domain == check_domain:
+                        related_zones.append(zone)
+                        found_zone = True
+                        print(f"- Zone: {zone.domain} (ID: {zone.zone_id})")
+                        break  # 현재 도메인에서 zone을 찾았으면 다음은 확인하지 않음
+                
+                if found_zone:
+                    break  # zone을 찾았으면 더 이상 확인하지 않음
+            
+            if not found_zone:
                 print("- 관련된 zone이 없습니다.")
+            
+            self.related_zones[target_domain] = related_zones
 
     def check_rule_for_targets(self, rule: Dict, ruleset_name: str, ruleset_phase: str, domain: str = 'Account Level') -> None:
         """Check if rule contains any of the target domains and store if found"""
@@ -148,33 +170,35 @@ class CloudflareRuleFinder:
         print("\nZone 레벨 룰셋 처리 중...")
         
         for target_domain, zones in self.related_zones.items():
-            print(f"\n도메인 '{target_domain}'에 대한 zone 룰셋 처리 중...")
-            
-            for zone in zones:
-                print(f"Zone 처리 중: {zone.domain}")
-                url = f"{self.base_url}/zones/{zone.zone_id}/rulesets"
-                response = requests.get(url, headers=self.headers)
-                rulesets = response.json()
+            if zones:  # zones가 있는 경우에만 처리
+                parent_domain = zones[0].domain  # 찾은 가장 가까운 상위 도메인
+                print(f"\n도메인 '{target_domain}'에 대한 zone 룰셋 처리 중... (상위 도메인: {parent_domain})")
                 
-                if not rulesets.get('success'):
-                    print(f"Zone 룰셋 조회 실패: {zone.domain}")
-                    continue
-
-                for ruleset in rulesets.get('result', []):
-                    ruleset_id = ruleset.get('id')
-                    ruleset_name = ruleset.get('name', 'Unnamed ruleset')
-                    ruleset_phase = ruleset.get('phase', 'Unknown phase')
-
-                    details_url = f"{self.base_url}/zones/{zone.zone_id}/rulesets/{ruleset_id}"
-                    details = requests.get(details_url, headers=self.headers).json()
+                for zone in zones:
+                    print(f"Zone 처리 중: {zone.domain}")
+                    url = f"{self.base_url}/zones/{zone.zone_id}/rulesets"
+                    response = requests.get(url, headers=self.headers)
+                    rulesets = response.json()
                     
-                    if not details.get('success'):
-                        print(f"Zone 룰셋 상세 정보 조회 실패: {ruleset_name}")
+                    if not rulesets.get('success'):
+                        print(f"Zone 룰셋 조회 실패: {zone.domain}")
                         continue
 
-                    rules = details.get('result', {}).get('rules', [])
-                    for rule in rules:
-                        self.check_rule_for_targets(rule, ruleset_name, ruleset_phase, zone.domain)
+                    for ruleset in rulesets.get('result', []):
+                        ruleset_id = ruleset.get('id')
+                        ruleset_name = ruleset.get('name', 'Unnamed ruleset')
+                        ruleset_phase = ruleset.get('phase', 'Unknown phase')
+
+                        details_url = f"{self.base_url}/zones/{zone.zone_id}/rulesets/{ruleset_id}"
+                        details = requests.get(details_url, headers=self.headers).json()
+                        
+                        if not details.get('success'):
+                            print(f"Zone 룰셋 상세 정보 조회 실패: {ruleset_name}")
+                            continue
+
+                        rules = details.get('result', {}).get('rules', [])
+                        for rule in rules:
+                            self.check_rule_for_targets(rule, ruleset_name, ruleset_phase, zone.domain)
 
     def export_to_excel(self):
         """Export found rules to Excel with separate sheets for each domain"""
@@ -182,9 +206,7 @@ class CloudflareRuleFinder:
             print("검색된 규칙이 없습니다.")
             return
 
-        # Generate filename with timestamp and domain
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        # 여러 도메인일 경우 첫 번째 도메인으로 파일명 생성
         main_domain = self.target_domains[0].replace('.', '_')
         filename = f'reports/{main_domain}_cloudflare_rule_validation_{timestamp}.xlsx'
         
@@ -224,23 +246,11 @@ class CloudflareRuleFinder:
 def main():
     try:
         finder = CloudflareRuleFinder()
-        
-        # Get target domains from user
         finder.set_target_domains()
-        
-        # Read all zones first
         zones = finder.read_zones_from_csv('enterprise_domains_8a215d1828c45f48abeb1d966d35faa0.csv')
-        
-        # Identify related zones for each target domain
         finder.identify_related_zones(zones)
-        
-        # Process account rulesets
         finder.process_account_rulesets()
-        
-        # Process zone rulesets only for related zones
         finder.process_zone_rulesets()
-        
-        # Export results to Excel
         finder.export_to_excel()
         
     except Exception as e:
